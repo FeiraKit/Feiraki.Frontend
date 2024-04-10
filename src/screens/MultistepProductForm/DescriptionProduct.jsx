@@ -64,7 +64,7 @@ export function DescriptionProduct() {
           behavior="height"
           h="4/6"
           pt={10}
-          keyboardVerticalOffset={RFValue(60)}
+          keyboardVerticalOffset={RFValue(10)}
         >
           <ControlledInput
             control={control}

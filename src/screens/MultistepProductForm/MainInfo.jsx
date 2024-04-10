@@ -76,7 +76,7 @@ export function MainInfo() {
       {!FormLoaded ? (
         <LoadingForm />
       ) : (
-        <ScrollView w="full" h="full" px="3%">
+        <ScrollView w="full" h="full" px="3%" _contentContainerStyle={{ paddingBottom: 10 }}>
           <VStack>
             <ButtonBack />
             <LogoFeira />

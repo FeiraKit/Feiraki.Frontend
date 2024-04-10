@@ -36,7 +36,7 @@ export function ScreenContent({
         >
           {TextDescription}
         </Text>
-        <StepIndicator active={PageActive} />
+        <StepIndicator quantitySteps={4} active={PageActive} />
       </VStack>
       <VStack w="full" h="2/6" alignSelf="center" justifyContent="center" alignItems="center">
         <Button

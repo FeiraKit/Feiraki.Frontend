@@ -1,12 +1,4 @@
-import {
-  Button,
-  HStack,
-  KeyboardAvoidingView,
-  Progress,
-  Text,
-  VStack,
-  useTheme,
-} from 'native-base';
+import { Button, HStack, Progress, ScrollView, Text, VStack, useTheme } from 'native-base';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
@@ -209,11 +201,14 @@ export function EditProduct() {
   }, [uploadedImages]);
 
   return (
-    <VStack w="full" h="full" px="3%">
-      {isLoading && <LoadingUploadImages percent={uploadProgress} />}
-      {!FormLoaded && <LoadingEditForm />}
-      <TouchableWithoutFeedback touchSoundDisabled onPress={() => Keyboard.dismiss()}>
-        <KeyboardAvoidingView behavior="height" w="full" h="full" keyboardVerticalOffset={10}>
+    <TouchableWithoutFeedback touchSoundDisabled onPress={() => Keyboard.dismiss()}>
+      <VStack w="full" h="full" px="3%" contentContainerStyle={{ paddingBottom: 30 }}>
+        {isLoading && <LoadingUploadImages percent={uploadProgress} />}
+        {!FormLoaded && <LoadingEditForm />}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        >
           <VStack>
             <ButtonBack />
             <LogoFeira />
@@ -352,6 +347,7 @@ export function EditProduct() {
                 />
               )}
             />
+
             <InputLabel title="disponível em:" color={colors.blue[950]} />
             <TouchableOpacity onPress={openCitiesBottomSheet}>
               <HStack
@@ -373,7 +369,7 @@ export function EditProduct() {
               </HStack>
             </TouchableOpacity>
 
-            <VStack w="full" alignItems="center" mt={2}>
+            <VStack w="full" alignItems="center">
               <ImagePickerSelectedImages
                 editionMode
                 setImageToRemove={setImageToRemove}
@@ -385,7 +381,7 @@ export function EditProduct() {
             </VStack>
           </VStack>
 
-          <VStack h="1/6">
+          <VStack h="1/6" mt={4}>
             <Button
               alignSelf="center"
               w="98%"
@@ -405,24 +401,24 @@ export function EditProduct() {
               </Text>
             </Button>
           </VStack>
-          <BottomSheetBase ref={bottomSheetRef} PanDownToClose>
-            <CustomImagePickerBottomSheet
-              images={images}
-              handleImage={setImages}
-              actionCloseBottonSheet={closeActionsSheet}
-            />
-          </BottomSheetBase>
-          <BottomSheetBase ref={bottomSheetRefCities} PanDownToClose>
-            <CustonSelectionMany
-              cities={allCities}
-              selectedCities={[...selectedCities]}
-              handleCities={handleSelectCities}
-              actionClose={closeCitiesBottomSheet}
-              hideConfirmButton
-            />
-          </BottomSheetBase>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
-    </VStack>
+        </ScrollView>
+        <BottomSheetBase ref={bottomSheetRef} PanDownToClose>
+          <CustomImagePickerBottomSheet
+            images={images}
+            handleImage={setImages}
+            actionCloseBottonSheet={closeActionsSheet}
+          />
+        </BottomSheetBase>
+        <BottomSheetBase ref={bottomSheetRefCities} PanDownToClose>
+          <CustonSelectionMany
+            cities={allCities}
+            selectedCities={[...selectedCities]}
+            handleCities={handleSelectCities}
+            actionClose={closeCitiesBottomSheet}
+            hideConfirmButton
+          />
+        </BottomSheetBase>
+      </VStack>
+    </TouchableWithoutFeedback>
   );
 }
